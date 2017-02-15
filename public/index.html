@@ -2,7 +2,6 @@
 <head>
   <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="style.css">
-  <script src="node_modules/angular/angular.min.js"></script>
 
 </head>
 <body ng-app="beerList" ng-controller="MainCtrl">
@@ -33,11 +32,12 @@
           <input type="text" class="form-control" placeholder="Image URL" ng-model="image"></input>
         </div>
 
-        <button type="submit" class="btn btn-primary">Add</button>
+        <button type="button" class="btn btn-primary">Add</button>
       </form>
     </div>
   </div>
   
+  <script src="node_modules/angular/angular.min.js"></script>
   <script src="js/app.js"></script>
   <script src="js/services/beers.js"></script>
   <script src="js/controllers/mainController.js"></script>
