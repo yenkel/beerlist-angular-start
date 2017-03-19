@@ -18,6 +18,8 @@ app.controller('beerController', function($scope,beerService) {
 		beerService.removeFromMyCollection(beer);
 	}
 
+
+
 	$scope.addRatingToBeer = function (beer,rating) {
 		beerService.addRatingToBeer(beer,Number(rating));
 	}
@@ -40,5 +42,7 @@ app.controller('beerController', function($scope,beerService) {
 		}
 	}
 
+ 	beerService.getBeers();
+	
 });
 

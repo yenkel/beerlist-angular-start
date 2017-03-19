@@ -45,10 +45,11 @@ app.post('/beers', function(req, res, next) {
 
 
 app.delete('/beers/:id', function(req, res, next) {
+  console.log("hadas"+req.params.id);
   Beer.remove({ _id: req.params.id }, function(err, beers) {
     if (err) {
       console.error(err)
-      return next(err);
+      // return next(err);
     } else {
       res.json(beers);
     }
@@ -66,6 +67,22 @@ app.put('/beers/:id', function(req, res, next) {
   });
 });
 
+// error handler to catch 404 and forward to main error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// main error handler
+// warning - not for use in production code!
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: err
+  });
+});
 app.listen('8000', function() {
   console.log("yo yo yo, on 8000 bro");
 });

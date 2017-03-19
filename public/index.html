@@ -11,16 +11,16 @@
             <div class="col-md-6 col-md-offset-3">
                 <h1 class="text-center">BeerList</h1>
                 <div class="page-header">
-                <button type="submit" class="btn btn-primary" ng-click="showIf()">Edit</button>
+                <button type="button" class="btn btn-primary" ng-click="showIf()">Edit</button>
                 </div>
                 <!-- render beers here -->
                 <div class="displayBeers" ng-repeat="beer in allBeers">
-                    <h3>{{beer.name}}</h3><input type="text" ng-if="show" ng-model="beer.name">
+                    <h3>{{beer._id}}---{{beer.name}}</h3><input type="text" ng-if="show" ng-model="beer.name">
                     <p>{{beer.style}}</p><input type="text" ng-if="show" ng-model="beer.style">
                     <em>{{beer.abv}}%</em><input type="text" ng-if="show" ng-model="beer.abv">
                     <img ng-src="{{beer.img}}">
                     <p>{{beer.rating}} {{beer.averageRating}}</p>
-                    <button type="submit" class="btn btn-danger" ng-click="removeFromMyCollection(beer)">Remove</button>
+                    <button type="button" class="btn btn-danger" ng-click="removeFromMyCollection(beer)">Remove</button>
                     <div class="form-group">
                       <label for="sel1">Rate Your Fav Beeer</label>
                       <select class="form-control" id="sel1" ng-model="rating">
@@ -31,9 +31,9 @@
                         <option>4</option>
                         <option>5</option>
                       </select>
-                      <button type="submit" class="btn btn-primary" ng-click="addRatingToBeer(beer,rating)">Rate it !</button>
+                      <button type="button" class="btn btn-primary" ng-click="addRatingToBeer(beer,rating)">Rate it !</button>
                     </div>
-                    <button type="submit" class="btn btn-primary" ng-click="sortByRating(beer)">Sort it !</button>
+                    <button type="button" class="btn btn-primary" ng-click="sortByRating(beer)">Sort it !</button>
                     
                 </div>
                 <form ng-submit="addToMyCollection()">
@@ -50,7 +50,7 @@
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Image URL" ng-model="img"></input>
                     </div>
-                    <button type="submit" class="btn btn-primary" ng-click="addToMyCollection(beer)">Add</button>
+                    <button type="button" class="btn btn-primary" ng-click="addToMyCollection(beer)">Add</button>
                 </form>
             </div>
         </div>

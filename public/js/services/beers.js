@@ -1,25 +1,30 @@
-app.service('beerService', function(){
-  
-  var allBeers = [
-		{img:"https://cdn.beeradvocate.com/im/beers/78820.jpg",name:"Kentucky Brunch Brand Stout", style:"American Double / Imperial Stout", abv:12, ratings:[],averageRating:0},
-    {img:"https://cdn.beeradvocate.com/im/beers/136936.jpg",name:"Good Morning", style:"American Double / Imperial Stout ", abv:8.4,ratings:[], averageRating:0},
-    {img:"https://cdn.beeradvocate.com/im/beers/87846.jpg",name:"King Julius", style:"American Double / Imperial IPA ", abv:8.3,ratings:[], averageRating:0},
-    {img:"https://cdn.beeradvocate.com/im/beers/146770.jpg",name:"Very Hazy", style:"American Double / Imperial IPA ", abv:8.6,ratings:[], averageRating:0},
-    {img:"https://cdn.beeradvocate.com/im/beers/21690.jpg",name:"Pliny The Younger", style:"American Double / Imperial IPA ", abv:10.0,ratings:[], averageRating:0}
+app.service('beerService', function($http){
+  var beerService = new Object();
+  beerService.allBeers =  [
+		// {img:"https://cdn.beeradvocate.com/im/beers/78820.jpg",name:"Kentucky Brunch Brand Stout", style:"American Double / Imperial Stout", abv:12, ratings:[],averageRating:0},
+  //   {img:"https://cdn.beeradvocate.com/im/beers/136936.jpg",name:"Good Morning", style:"American Double / Imperial Stout ", abv:8.4,ratings:[], averageRating:0},
+  //   {img:"https://cdn.beeradvocate.com/im/beers/87846.jpg",name:"King Julius", style:"American Double / Imperial IPA ", abv:8.3,ratings:[], averageRating:0},
+  //   {img:"https://cdn.beeradvocate.com/im/beers/146770.jpg",name:"Very Hazy", style:"American Double / Imperial IPA ", abv:8.6,ratings:[], averageRating:0},
+  //   {img:"https://cdn.beeradvocate.com/im/beers/21690.jpg",name:"Pliny The Younger", style:"American Double / Imperial IPA ", abv:10.0,ratings:[], averageRating:0}
 	];
 
 
   var test = "Im alive from the service"; 
 
-  var addToMyCollection = function(beer){
-    console.log(allBeers);
-  	var index = indexInMyCollection(beer);
-  	if(index < 0){
-		  	allBeers.push(beer);
-  	}
+  beerService.addToMyCollection = function(beer){
+    // console.log(beers);
+  	var index = beerService.indexInMyCollection(beer);
+    return $http.post('/beers', beer)
+    .then(function(response) {
+            if(index < 0){
+               beerService.allBeers.push(response.data);
+            }
+    }, function(err) {
+      console.error(err)
+    });
   }
 
-  var addRatingToBeer = function (beer,rating) {
+ beerService.addRatingToBeer = function (beer,rating) {
     beer.ratings.push(rating);
     var total = 0;
     for (var i =0; i < beer.ratings.length ; i++) {
@@ -30,13 +35,17 @@ app.service('beerService', function(){
   }
 
 
-  var removeFromMyCollection = function(beerToRemove){
-  	allBeers.splice(indexInMyCollection(beerToRemove), 1);
+  beerService.removeFromMyCollection = function(beerToRemove){
+  	beerService.allBeers.splice(beerService.indexInMyCollection(beerToRemove), 1);
+    return $http.delete('/beers/' + (beerToRemove._id))
+    .then(function(response) {
+       //beerService.allBeers.splice(response,1);
+    })
   }
 
-  var indexInMyCollection = function(beerToCheck){
-  	for(m in allBeers){
-  		var beer = allBeers[m];
+  beerService.indexInMyCollection = function(beerToCheck){
+  	for(m in beerService.allBeers){
+  		var beer = beerService.allBeers[m];
   		if(beerToCheck.name == beer.name){
   			return m;
   		}
@@ -44,18 +53,27 @@ app.service('beerService', function(){
   	return -1;
   }
 
-var sortByRating = function () {
+beerService.sortByRating = function () {
   allBeers.sort(function(a, b) {
   return a.averageRating - b.averageRating;
   });
 }
 
-  return {
-  				allBeers: allBeers,
-  				addToMyCollection: addToMyCollection,
-  				removeFromMyCollection: removeFromMyCollection,
-          addRatingToBeer: addRatingToBeer,
-          sortByRating: sortByRating,
-          test: test
-  				};
+beerService.getBeers = function () {
+    return $http.get('/beers')
+    .then(function(response) {
+      angular.copy(response.data, beerService.allBeers);
+    }, function(err) {
+      console.error(err)
+    });
+}
+
+  beerService.updateBeer = function(beer) {
+    return $http.put('/beers/' + beer._id, beer)
+      .then(function(response) {
+        return response.data
+      });
+  };
+
+  return beerService;
 })
