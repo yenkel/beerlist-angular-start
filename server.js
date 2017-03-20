@@ -30,19 +30,49 @@ app.get('/beers', function (req, res, next) {
   });
 });
 
-app.post('/beers', function(req, res, next) {
-  var beer = new Beer(req.body);
-
-  beer.save(function(err, beers) {
+app.post('/beers/:id/reviews', function(req, res, next) {
+  Beer.findById(req.params.id, function(err, foundBeer) {
     if (err) {
-      console.error(err)
+      console.error(err);
       return next(err);
+    } else if (!foundBeer) {
+      return res.send("Error! No beer found with that ID");
     } else {
-      res.json(beers);
+      foundBeer.reviews.push(req.body)
+      foundBeer.save(function(err, updatedBeer) {
+        if (err) {
+          return next(err);
+        } else {
+          res.send(updatedBeer);
+        }
+      });
     }
   });
 });
 
+app.delete('/beers/:beerId/reviews/:reviewId', function (req,res,next) {
+    Beer.findById(req.params.beerId, function(err, foundBeer) {
+    if (err) {
+      return next(err);
+    } else if (!foundBeer) {
+      return res.send("Error! No beer found with that ID");
+    } else {
+      var reviewToDelete = foundBeer.reviews.id(req.params.reviewId)
+      if (reviewToDelete) {
+        reviewToDelete.remove()
+        foundBeer.save(function(err, updatedBeer) {
+          if (err) {
+            return next(err);
+          } else {
+            res.send(updatedBeer);
+          }
+        });
+      } else {
+        return res.send("Error! No review found with that ID");
+      }
+    }
+  });
+});
 
 app.delete('/beers/:id', function(req, res, next) {
   console.log("hadas"+req.params.id);
@@ -78,11 +108,13 @@ app.use(function(req, res, next) {
 // warning - not for use in production code!
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
+  res.send({
     message: err.message,
     error: err
   });
 });
+
+
 app.listen('8000', function() {
   console.log("yo yo yo, on 8000 bro");
 });

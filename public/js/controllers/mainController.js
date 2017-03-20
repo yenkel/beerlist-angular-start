@@ -11,7 +11,7 @@ app.controller('beerController', function($scope,beerService) {
 		};
 
 		beerService.addToMyCollection(beer);
-	}	
+	}
 
 
 	$scope.removeFromMyCollection = function(beer){
@@ -42,7 +42,30 @@ app.controller('beerController', function($scope,beerService) {
 		}
 	}
 
- 	beerService.getBeers();
-	
-});
+	//this is an array to store the copy we make of our beer for editing purposes
+  $scope.tempBeer = [];
 
+  $scope.editBeer = function(index) {
+    //copy the beer to be edited into a position on the tempBeer array
+    $scope.tempBeer[index] = angular.copy($scope.allBeers[index]);
+  };
+
+  $scope.updateBeer = function(index) {
+    //pass the modified beer in the tempBeer array to our factory
+    beerService.updateBeer($scope.tempBeer[index])
+      .then(function(updatedBeer) {
+        //if all goes OK the server sends back the updated beer
+        $scope.allBeers[index] = updatedBeer;
+      }, function(err) {
+        //if there has been a problem then alert it
+        alert(err.data.message);
+      })
+      .then(function() {
+        //finally, success or error, we need to clear the tempBeer so the view updates
+        $scope.tempBeer[index] = null;
+      })
+  };
+
+ 	beerService.getBeers();
+
+});
