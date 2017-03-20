@@ -43,6 +43,25 @@ app.post('/beers', function(req, res, next) {
   });
 });
 
+app.post('/beers/:id/reviews', function(req, res, next) {
+  Beer.findById(req.params.id, function(err, foundBeer) {
+    if (err) {
+      console.error(err);
+      return next(err);
+    } else if (!foundBeer) {
+      return res.send("Error! No beer found with that ID");
+    } else {
+      foundBeer.reviews.push(req.body)
+      foundBeer.save(function(err, updatedBeer) {
+        if (err) {
+          return next(err);
+        } else {
+          res.send(updatedBeer);
+        }
+      });
+    }
+  });
+});
 
 app.delete('/beers/:id', function(req, res, next) {
   console.log("hadas"+req.params.id);
@@ -83,6 +102,8 @@ app.use(function(err, req, res, next) {
     error: err
   });
 });
+
+
 app.listen('8000', function() {
   console.log("yo yo yo, on 8000 bro");
 });

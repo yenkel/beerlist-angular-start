@@ -25,13 +25,14 @@ app.service('beerService', function($http){
   }
 
  beerService.addRatingToBeer = function (beer,rating) {
-    beer.ratings.push(rating);
+  console.log(beer);
+    beer.rating.push(rating);
     var total = 0;
-    for (var i =0; i < beer.ratings.length ; i++) {
-      total += beer.ratings[i];
+    for (var i =0; i < beer.rating.length ; i++) {
+      total += beer.rating[i];
     }
-    beer.averageRating = total / beer.ratings.length;
-    console.log(allBeers);
+    beer.averageRating = total / beer.rating.length;
+    
   }
 
 
