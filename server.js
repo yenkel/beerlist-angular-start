@@ -63,6 +63,30 @@ app.post('/beers/:id/reviews', function(req, res, next) {
   });
 });
 
+app.delete('/beers/:beerId/reviews/:reviewId', function (req,res,next) {
+    Beer.findById(req.params.beerId, function(err, foundBeer) {
+    if (err) {
+      return next(err);
+    } else if (!foundBeer) {
+      return res.send("Error! No beer found with that ID");
+    } else {
+      var reviewToDelete = foundBeer.reviews.id(req.params.reviewId)
+      if (reviewToDelete) {
+        reviewToDelete.remove()
+        foundBeer.save(function(err, updatedBeer) {
+          if (err) {
+            return next(err);
+          } else {
+            res.send(updatedBeer);
+          }
+        });
+      } else {
+        return res.send("Error! No review found with that ID");
+      }
+    }
+  });
+});
+
 app.delete('/beers/:id', function(req, res, next) {
   console.log("hadas"+req.params.id);
   Beer.remove({ _id: req.params.id }, function(err, beers) {
@@ -97,7 +121,7 @@ app.use(function(req, res, next) {
 // warning - not for use in production code!
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
+  res.send({
     message: err.message,
     error: err
   });
