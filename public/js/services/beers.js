@@ -12,7 +12,7 @@ app.service('beerService', function($http){
   var test = "Im alive from the service";
 
   beerService.addToMyCollection = function(beer){
-    // console.log(beers);
+    console.log(beer);
   	var index = beerService.indexInMyCollection(beer);
     return $http.post('/beers', beer)
     .then(function(response) {
@@ -20,7 +20,7 @@ app.service('beerService', function($http){
                beerService.allBeers.push(response.data);
             }
     }, function(err) {
-      console.error(err)
+      console.error(err);
     });
   }
 
@@ -67,7 +67,7 @@ beerService.getBeers = function () {
     }, function(err) {
       console.error(err)
     });
-}
+};
 
   beerService.updateBeer = function(beer) {
     return $http.put('/beers/' + beer._id, beer)
@@ -75,6 +75,12 @@ beerService.getBeers = function () {
         return response.data
       });
   };
+
+  beerService.reviews = [] ;
+
+ beerService.addToMyReviews = function (review, id) {
+   return $http.post('/beers/' + id + '/reviews', review)
+ };
 
   return beerService;
 })

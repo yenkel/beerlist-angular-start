@@ -1,13 +1,15 @@
-app.controller('beerController', function($scope,beerService) {
+app.controller('mainController', function($scope,beerService) {
 
 	$scope.allBeers = beerService.allBeers;
 
 	$scope.addToMyCollection = function(){
-		var beer = {name: $scope.name,
-			style: $scope.style,
-			abv: $scope.abv,
-			img: $scope.img,
-			rating: $scope.rating
+		console.log('scope', $scope);
+		var beer = {
+			name: $scope.newBeer.name,
+			style: $scope.newBeer.style,
+			abv: $scope.newBeer.abv,
+			image_url: $scope.newBeer.image_url,
+			// ratings: $scope.newBeer.ratings
 		};
 
 		beerService.addToMyCollection(beer);
@@ -67,5 +69,9 @@ app.controller('beerController', function($scope,beerService) {
   };
 
  	beerService.getBeers();
+
+	app.controller('beerController', function($scope) {
+	  $scope.beer = "I have no beer yet :-("
+	});
 
 });

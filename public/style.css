@@ -1,0 +1,67 @@
+.container-fluid{
+  background-color:black;
+}
+
+.container{
+  background-image: url(http://www.wallfizz.com/produit/heineken/2968-heineken-biere-WallFizz.jpg);
+}
+
+h1{
+  color: white;
+  font-family: 'Merriweather', serif;
+  font-size: 86px;
+  background: -webkit-linear-gradient(left, yellow, white);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+h2{
+  color: white;
+  font-size: 70px;
+  font-family: 'Merriweather', serif;
+  background: -webkit-linear-gradient(left, yellow, white);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+h4{
+  color: white;
+  font-family: 'Merriweather', serif;
+  background: -webkit-linear-gradient(left, yellow, white);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+h5{
+  color: gold;
+  font-size: 30px;
+  font-family: 'Merriweather', serif;
+  background: -webkit-linear-gradient(left, yellow, white);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+label{
+  color: gold;
+}
+
+img{
+  height: 250px;
+}
+
+a{
+  color:white;
+}
+
+.navbar-default .navbar-brand {
+    color:white;
+}
+
+.navbar-default .navbar-text {
+    color: white;
+    font-family: cursive;
+}
+
+.form-control1{
+      width: 30%;
+}
