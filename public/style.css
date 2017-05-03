@@ -4,6 +4,7 @@
 
 .container{
   background-image: url(http://www.wallfizz.com/produit/heineken/2968-heineken-biere-WallFizz.jpg);
+  background-size: 100%;
 }
 
 h1{
