@@ -27,8 +27,9 @@
                 <div ng-if="!tempBeer[$index]">
                     <!-- we want to display the form whilst editing -->
                     <h2>{{beer.name}} </h2>
-                    <h5>{{beer.style}} - {{beer.abv}}%</h5>
-
+                    <h5>{{beer.style}} -
+                      {{beer.abv}}%</h5>
+                       <img ng-src="{{beer.image_url}}" />
                     <span>
                         <button type="button" class="btn btn-danger" ng-click="removeFromMyCollection(beer)">Remove</button>
                         <button type="button" class="btn btn-primary" ng-click="editBeer($index)">Edit</button>
