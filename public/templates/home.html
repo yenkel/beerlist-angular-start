@@ -31,7 +31,7 @@
                       {{beer.abv}}%</h5>
                        <img ng-src="{{beer.image_url}}" />
                     <span>
-                      <i class="fa fa-times" aria-hidden="true"   ng-click="removeFromMyCollection(beer)"> </i></button>
+                      <i class="fa fa-times" ng-click="removeFromMyCollection(beer)"> </i></button>
                         <button type="button" class="btn btn-primary1" ng-click="editBeer($index)">Edit</button>
                     </span>
                     <!-- <a ui-sref="beer({id: beer._id, beerParam: beer})" style="margin-top:210px;">Reviews</a> -->
