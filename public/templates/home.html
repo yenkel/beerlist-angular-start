@@ -18,8 +18,9 @@
                 <input type="text" class="form-control" placeholder="Image URL" ng-model="newBeer.image_url"></input>
             </div>
             <!-- <button type="button" class="btn btn-primary" ng-click="addToMyCollection(newBeer)">Add</button> -->
-            <div class="item">
-            <i class="fa fa-plus" ng-click="addToMyCollection(newBeer)" aria-hidden="true"></i>
+            <div id="jolibouton">
+         <id="remove" class="remove" ng-click="addToMyCollection(newBeer)" style="color:red;"><i class="fa fa-times fa-5x"></i></id>
+       </div>
           </div>
         </form>
         <hr>
