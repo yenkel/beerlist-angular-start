@@ -19,10 +19,12 @@ h1{
 }
 
 h2{
-  color:white;
+  color: white;
   font-size: 70px;
   font-family: 'Merriweather', serif;
-
+  background: -webkit-linear-gradient(left, yellow, white);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
 }
 
 h4{
