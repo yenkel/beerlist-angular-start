@@ -6,8 +6,8 @@ app.controller('mainController', function($scope,beerService) {
 		console.log('scope', $scope);
 		var beer = {
 			name: $scope.newBeer.name,
-			// style: $scope.newBeer.style,
-			// abv: $scope.newBeer.abv,
+			style: $scope.newBeer.style,
+			abv: $scope.newBeer.abv,
 			image_url: $scope.newBeer.image_url,
 			// ratings: $scope.newBeer.ratings
 		};
