@@ -33,6 +33,7 @@ h4{
   background: -webkit-linear-gradient(left, yellow, white);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
+font-size: 30px;
 }
 
 h5{
