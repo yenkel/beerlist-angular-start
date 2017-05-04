@@ -1,6 +1,6 @@
 
 body{
-  background-image: url(http://www.wallfizz.com/produit/heineken/2968-heineken-biere-WallFizz.jpg);
+  background-image: url(http://2.bp.blogspot.com/-kqW50wI2qvk/UTYPohBUIaI/AAAAAAAAOPk/FRv42YtTSbg/s1600/corona800x6001.jpg);
   background-size: 100%;
 }
 
@@ -70,12 +70,8 @@ a{
 }
 
 .btn-danger {
-    margin-top: 210px;
-}
-
-.btn-primary1{
     color: #fff;
-    background-color: #337ab7;
-    border-color: #2e6da4;
+    background-color: #d9534f;
+    border-color: #d43f3a;
     margin-top: 210px;
 }

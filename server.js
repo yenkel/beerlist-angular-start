@@ -7,7 +7,7 @@ var passport = require('passport')
 var userRoutes = require ('./routes/userRoutes')
 var Beer = require("./models/BeerModel");
 var User = require("./models/UserModel");
-mongoose.connect(process.env.CONNECTION_STRING||'mongodb://localhost/beers');
+mongoose.connect('mongodb://localhost/beers');
 
 var beerRoutes = require('./routes/beerRoutes');
 var bodyParser = require('body-parser')
@@ -36,4 +36,6 @@ app.use('/users', userRoutes);
 //   res.send('Testing Server')
 // })
 
-app.listen(process.env.PORT || '8080');
+app.listen('8000', function() {
+  console.log("yo yo yo, on 8000 bro");
+});
