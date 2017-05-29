@@ -7,6 +7,7 @@ var passport = require('passport')
 var userRoutes = require('./routes/userRoutes')
 var Beer = require("./models/BeerModel");
 var User = require("./models/UserModel");
+
 mongoose.connect(process.env.CONNECTION_STRING || 'mongodb://localhost/beers');
 
 var beerRoutes = require('./routes/beerRoutes');
@@ -35,4 +36,4 @@ app.use('/users', userRoutes);
 // app.get('/', function(req, res) {
 //   res.send('Testing Server')
 // })
-app.listen(process.env.PORT || '8000');
+app.listen(process.env.PORT || '8080');
